@@ -4,12 +4,29 @@
     <nav>
       <router-link :to="{ name: 'Home' }">Home</router-link>
       <router-link :to="{ name: 'Create' }">Create Post</router-link>
+      <button v-if="user" @click="signOut">Sign Out</button>
+      <button v-else @click="signIn">SignIn with Google</button>
     </nav>
   </header>
 </template>
 
 <script>
-export default {};
+import { firebaseAuth, provider } from "@/firebase/config";
+export default {
+  setup() {
+    const signIn = () => {
+      firebaseAuth.signInWithPopup(provider);
+    };
+
+    const signOut = () => {
+      firebaseAuth.signOut();
+    };
+
+    const user = firebaseAuth.currentUser;
+
+    return { signIn, signOut, user };
+  },
+};
 </script>
 
 <style>
