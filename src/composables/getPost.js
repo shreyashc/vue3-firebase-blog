@@ -14,7 +14,6 @@ const getPost = (id) => {
       if (!res.exists) {
         throw Error("Not found");
       }
-
       post.value = { ...res.data(), id: res.id };
     } catch (err) {
       error.value = err.message;

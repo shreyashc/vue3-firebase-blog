@@ -22,8 +22,9 @@ header {
   padding: 10px;
 }
 header h1 {
-  color: #dfdfdf;
+  color: #ff8902f5;
   font-size: 48px;
+  margin: 5px;
 }
 header a {
   color: #bbb;
@@ -33,5 +34,6 @@ header a {
 header a.router-link-active {
   color: #444;
   font-weight: bold;
+  font-size: 1.6rem;
 }
 </style>
