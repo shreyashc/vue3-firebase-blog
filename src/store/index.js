@@ -27,6 +27,7 @@ const store = createStore({
         commit("SET_USER", {
           displayName: user.displayName,
           email: user.email,
+          uid: user.uid,
         });
       } else {
         commit("SET_USER", null);

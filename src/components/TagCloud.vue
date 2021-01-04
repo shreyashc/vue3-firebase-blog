@@ -1,6 +1,6 @@
 <template>
   <div class="tag-cloud">
-    <h3>Tags</h3>
+    <h3 class="text-xl text-black font-black text-center">Tags</h3>
     <div v-for="tag in tags" :key="tag">
       <router-link :to="{ name: 'Tag', params: { tag } }">
         #{{ tag }}
@@ -25,11 +25,7 @@ export default {
 .tag-cloud {
   padding: 10px;
 }
-.tag-cloud h3 {
-  border-bottom: 1px solid #eee;
-  padding: 16px 8px;
-  color: #444;
-}
+
 .tag-cloud div {
   display: inline-block;
   padding: 10px;

@@ -1,7 +1,10 @@
 <template>
   <div class="home">
-    <div v-if="user.data" class="user">
-      {{ user.data.displayName }}
+    <div
+      v-if="user.data"
+      class="user text-xl text-gray-700 text-center p-2 font-semibold"
+    >
+      Welcome, {{ user.data.displayName }} !
     </div>
     <div v-if="error">{{ error }}</div>
     <div v-if="posts.length">
@@ -34,6 +37,7 @@ export default {
     const { posts, error, load } = getPosts();
     const store = useStore();
     const user = computed(() => store.state.user);
+    console.log("sad", user.value.data);
     load();
     return { posts, error, user };
   },

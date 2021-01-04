@@ -2,24 +2,43 @@
   <div class="create">
     <form @submit.prevent="handleSubmit">
       <label>Title:</label>
-      <input v-model="title" type="text" required />
+      <input
+        v-model="title"
+        type="text"
+        class="focus:outline-none focus:ring focus:border-blue-300"
+        required
+      />
       <label>Content:</label>
-      <textarea v-model="body" required></textarea>
+      <textarea
+        v-model="body"
+        required
+        class="focus:outline-none focus:ring focus:border-blue-300"
+      ></textarea>
       <label>Tags (hit enter to add a tag):</label>
-      <input @keydown.enter.prevent="handleKeydown" v-model="tag" type="text" />
+      <input
+        @keydown.enter.prevent="handleKeydown"
+        v-model="tag"
+        type="text"
+        class="focus:outline-none focus:ring focus:border-blue-300"
+      />
 
       <div v-for="tag in tags" :key="tag" class="pill">#{{ tag }}</div>
-      <button>Add Post</button>
+      <button class="bg-blue-500 text-white py-2 px-3 rounded-md block my-3">
+        Add Post
+      </button>
     </form>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
 import { projectFirestore, timestamp } from "../firebase/config";
 import { useRouter } from "vue-router";
 export default {
   setup() {
+    const store = useStore();
+    const user = computed(() => store.state.user);
     const title = ref("");
     const body = ref("");
     const tags = ref([]);
@@ -42,6 +61,8 @@ export default {
         body: body.value,
         tags: tags.value,
         createdAt: timestamp(),
+        displayName: user.value.data.displayName,
+        authorId: user.value.data.uid,
       };
       const res = await projectFirestore.collection("posts").add(post);
       router.push({ name: "Home" });
@@ -52,7 +73,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 form {
   max-width: 480px;
   margin: 0 auto;
@@ -61,7 +82,7 @@ form {
 input,
 textarea {
   display: block;
-  margin: 10px 0;
+  margin: 5px 0;
   width: 100%;
   box-sizing: border-box;
   padding: 10px;
@@ -75,30 +96,10 @@ label {
   margin-top: 30px;
   position: relative;
   font-size: 20px;
-  color: white;
-  margin-bottom: 10px;
+  color: #0f0f0f;
+  margin-bottom: 5px;
 }
-label::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: #ff8800;
-  position: absolute;
-  z-index: -1;
-  padding-right: 40px;
-  left: -30px;
-  transform: rotateZ(-1.5deg);
-}
-button {
-  display: block;
-  margin-top: 30px;
-  background: #ff8800;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  font-size: 18px;
-}
+
 .pill {
   display: inline-block;
   margin: 10px 10px 0 0;
