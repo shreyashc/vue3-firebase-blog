@@ -4,20 +4,23 @@
       <h3 class="text-3xl font-black my-2">{{ post.title }}</h3>
     </router-link>
     <p class=" my-3 mx-1 text-lg ">{{ snippet }}</p>
-    <span
-      class="
+    <div class="flex flex-wrap">
+      <span
+        class="
       bg-blue-500
       text-white
        py-1 px-2
+      my-1
       rounded-lg
       cursor-pointer
       mx-1
       "
-      v-for="tag in post.tags"
-      :key="tag"
-    >
-      #{{ tag }}
-    </span>
+        v-for="tag in post.tags"
+        :key="tag"
+      >
+        #{{ tag }}
+      </span>
+    </div>
   </div>
 </template>
 
