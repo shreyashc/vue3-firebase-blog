@@ -4,7 +4,7 @@
     <nav>
       <router-link :to="{ name: 'Home' }">Home</router-link>
       <router-link :to="{ name: 'Create' }">Create Post</router-link>
-      <button v-if="user" @click="signOut">Sign Out</button>
+      <button v-if="user.loggedIn" @click="signOut">Sign Out</button>
       <button v-else @click="signIn">SignIn with Google</button>
     </nav>
   </header>
@@ -12,8 +12,13 @@
 
 <script>
 import { firebaseAuth, provider } from "@/firebase/config";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   setup() {
+    const store = useStore();
+    const user = computed(() => store.state.user);
+
     const signIn = () => {
       firebaseAuth.signInWithPopup(provider);
     };
@@ -21,8 +26,6 @@ export default {
     const signOut = () => {
       firebaseAuth.signOut();
     };
-
-    const user = firebaseAuth.currentUser;
 
     return { signIn, signOut, user };
   },

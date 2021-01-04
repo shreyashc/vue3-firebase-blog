@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <div v-if="user" class="user">
-      {{ user.displayName }}
+    <div v-if="user.data" class="user">
+      {{ user.data.displayName }}
     </div>
     <div v-if="error">{{ error }}</div>
     <div v-if="posts.length">
@@ -15,12 +15,14 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
+
 import PostList from "../components/PostList";
 import getPosts from "../composables/getPosts";
 import Spinner from "../components/Spinner";
 import TagCloud from "../components/TagCloud.vue";
-import { firebaseAuth } from "@/firebase/config";
+
 export default {
   name: "Home",
   components: {
@@ -30,10 +32,9 @@ export default {
   },
   setup() {
     const { posts, error, load } = getPosts();
-    const user = firebaseAuth.currentUser;
-    console.log(user);
+    const store = useStore();
+    const user = computed(() => store.state.user);
     load();
-
     return { posts, error, user };
   },
 };
