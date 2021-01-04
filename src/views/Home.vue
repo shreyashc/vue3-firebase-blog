@@ -2,9 +2,17 @@
   <div class="home">
     <div
       v-if="user.data"
-      class="user text-xl text-gray-700 text-center p-2 font-semibold"
+      class="user text-xl text-gray-700 text-center p-2 font-semibold 
+      "
     >
       Welcome, {{ user.data.displayName }} !
+    </div>
+    <div
+      v-else
+      class="user text-xl text-gray-500 text-center px-2 pt-1 font-semibold 
+      "
+    >
+      Sign In to Create a blog.
     </div>
     <div v-if="error">{{ error }}</div>
     <div v-if="posts.length">

@@ -3,7 +3,7 @@
     <router-link :to="{ name: 'Details', params: { id: post.id } }">
       <h3 class="text-3xl font-black my-2">{{ post.title }}</h3>
     </router-link>
-    <p class="font-thin mb-2 text-lg ">{{ snippet }}</p>
+    <p class=" my-3 mx-1 text-lg ">{{ snippet }}</p>
     <span
       class="
       bg-blue-500

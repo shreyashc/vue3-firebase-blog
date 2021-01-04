@@ -5,8 +5,8 @@
     <h5 class="my-0 mx-2 text-gray-600">
       By <span class="text-purple-600">{{ post.displayName }} </span>
     </h5>
-    <p class="pre ">{{ post.body }}</p>
-    <div class="my-2" v-if="user.data.uid === post.authorId">
+    <p class="pre">{{ post.body }}</p>
+    <div class="my-2" v-if="user.data && user.data.uid === post.authorId">
       <button
         @click="handleClick"
         class="px-3 py-2 font-semibold  text-red-600 ring m-2  ring-red-100
@@ -15,13 +15,13 @@
       >
         Delete
       </button>
-      <button
+      <!-- <button
         class="px-3 py-2 font-semibold  text-green-600 ring m-2 ring-green-100
       hover:bg-green-600 hover:text-white
       "
       >
         Edit
-      </button>
+      </button> -->
     </div>
   </div>
   <div v-else><Spinner /></div>

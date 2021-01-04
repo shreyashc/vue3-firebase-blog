@@ -1,5 +1,6 @@
 <template>
-  <div class="create">
+  <div class="create p-4">
+    <h1 class="font-black text-center">Create A New Post</h1>
     <form @submit.prevent="handleSubmit">
       <label>Title:</label>
       <input
@@ -44,6 +45,11 @@ export default {
     const tags = ref([]);
     const tag = ref("");
     const router = useRouter();
+
+    if (!user.value.loggedIn) {
+      router.push({ name: "Home" });
+    }
+
     const handleKeydown = () => {
       if (!tag.value.trim()) {
         return;
