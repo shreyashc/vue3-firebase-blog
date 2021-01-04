@@ -2,6 +2,8 @@
 
 # live
 
+[https://hc-vue-blog.web.app/](https://hc-vue-blog.web.app/).
+
 ## Project setup
 
 ```
